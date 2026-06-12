@@ -21,7 +21,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <Link className="flex items-center gap-2 text-lg font-bold text-white" to="/">
+        <Link className="flex items-center gap-2 text-lg font-bold text-slate-50" to="/">
           <span className="grid h-9 w-9 place-items-center rounded-lg bg-sky-400 text-slate-950">
             <ShieldCheck className="h-5 w-5" />
           </span>

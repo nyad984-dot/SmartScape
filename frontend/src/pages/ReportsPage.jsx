@@ -64,7 +64,7 @@ export default function ReportsPage() {
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{report.id}</p>
-                  <h2 className="mt-1 text-xl font-semibold text-white">{report.title}</h2>
+                  <h2 className="mt-1 text-xl font-semibold text-slate-100">{report.title}</h2>
                   <p className="mt-2 text-sm text-slate-400">{report.location} • {formatDate(report.date)}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">

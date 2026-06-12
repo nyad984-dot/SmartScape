@@ -79,12 +79,12 @@ export default function ReportCreatePage() {
           {submitted && <Alert type="success">Report submitted and routed to Transport Department.</Alert>}
           {showAnalysis && (
             <Card>
-              <h2 className="mb-4 text-lg font-semibold text-white">AI Analysis</h2>
+              <h2 className="mb-4 text-lg font-semibold text-slate-100">AI Analysis</h2>
               <div className="space-y-3">
                 {Object.entries(analysis).map(([key, value]) => (
                   <div className="flex justify-between gap-4 border-b border-slate-800 pb-3 last:border-0" key={key}>
                     <span className="text-sm text-slate-400">{key}</span>
-                    <span className="text-right text-sm font-semibold text-white">{value}</span>
+                    <span className="text-right text-sm font-semibold text-slate-100">{value}</span>
                   </div>
                 ))}
               </div>

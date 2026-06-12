@@ -17,7 +17,6 @@ export default function LoginPage() {
     password: '',
   });
 
-
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -55,13 +54,11 @@ export default function LoginPage() {
     } finally {
       setLoading(false);
     }
-    
   };
-
 
   return (
     <Card>
-      <h1 className="text-2xl font-semibold text-white">Welcome back</h1>
+      <h1 className="text-2xl font-semibold text-slate-100">Welcome back</h1>
       <p className="mt-2 text-sm text-slate-400">Sign in to manage reports and city analytics.</p>
       <form className="mt-6 space-y-4" onSubmit={handleLogin}>
         <Input
@@ -83,19 +80,19 @@ export default function LoginPage() {
           value={form.password}
         />
         <div className="flex items-center justify-between text-sm text-slate-400">
-          <label className="flex items-center gap-2">
+          <label className="flex items-center gap-2 cursor-pointer select-none">
             <input className="accent-sky-400" type="checkbox" />
             Remember me
           </label>
-          <Link className="text-sky-300" to="/login">Forgot password?</Link>
+          <Link className="text-sky-300 font-semibold" to="/login">Forgot password?</Link>
         </div>
-        {error && <p className="text-sm font-medium text-rose-300">{error}</p>}
+        {error && <p className="text-sm font-medium text-rose-600">{error}</p>}
         <Button className="w-full" disabled={loading} type="submit">
           {loading ? 'Logging in...' : 'Login'}
         </Button>
       </form>
       <p className="mt-5 text-center text-sm text-slate-400">
-        New here? <Link className="text-sky-300" to="/register">Create an account</Link>
+        New here? <Link className="text-sky-300 font-semibold" to="/register">Create an account</Link>
       </p>
     </Card>
   );

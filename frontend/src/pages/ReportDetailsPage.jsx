@@ -15,7 +15,7 @@ export default function ReportDetailsPage() {
   if (!report) {
     return (
       <Card>
-        <h1 className="text-2xl font-semibold text-white">Report not found</h1>
+        <h1 className="text-2xl font-semibold text-slate-100">Report not found</h1>
         <Button className="mt-4" to="/reports">Back to reports</Button>
       </Card>
     )
@@ -40,7 +40,7 @@ export default function ReportDetailsPage() {
             <p className="leading-7 text-slate-300">{report.description}</p>
           </Card>
           <Card>
-            <h2 className="mb-4 text-lg font-semibold text-white">Timeline</h2>
+            <h2 className="mb-4 text-lg font-semibold text-slate-100">Timeline</h2>
             <div className="space-y-4">
               {report.timeline.map((item, index) => (
                 <div className="flex gap-3" key={item}>
@@ -51,14 +51,14 @@ export default function ReportDetailsPage() {
             </div>
           </Card>
           <Card>
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white"><MessageSquare className="h-5 w-5 text-sky-300" /> Comments</h2>
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100"><MessageSquare className="h-5 w-5 text-sky-300" /> Comments</h2>
             {report.comments.map((comment) => (
               <p className="rounded-lg bg-slate-900/70 p-3 text-sm text-slate-300" key={comment}>{comment}</p>
             ))}
           </Card>
         </div>
         <Card>
-          <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white"><Paperclip className="h-5 w-5 text-sky-300" /> Attached image</h2>
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100"><Paperclip className="h-5 w-5 text-sky-300" /> Attached image</h2>
           <img alt="" className="aspect-[4/3] w-full rounded-lg object-cover" src={report.image} />
         </Card>
       </div>

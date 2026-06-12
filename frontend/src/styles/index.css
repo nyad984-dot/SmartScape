@@ -1,9 +1,37 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
 
+@theme {
+  /* Redefine slate colors for a premium, clean light mode */
+  --color-slate-50: #0f172a;
+  --color-slate-100: #1e293b;
+  --color-slate-200: #334155;
+  --color-slate-300: #475569;
+  --color-slate-400: #64748b;
+  --color-slate-500: #94a3b8;
+  --color-slate-600: #cbd5e1;
+  --color-slate-700: #e2e8f0;
+  --color-slate-800: #f1f5f9;
+  --color-slate-900: #f8fafc;
+  --color-slate-950: #ffffff;
+
+  /* Redefine sky colors to act as a sleek, modern AI-branding indigo/violet */
+  --color-sky-50: #f5f3ff;
+  --color-sky-100: #e0e7ff;
+  --color-sky-200: #c7d2fe;
+  --color-sky-300: #4f46e5;
+  --color-sky-400: #6366f1;
+  --color-sky-500: #4338ca;
+  --color-sky-600: #3730a3;
+  --color-sky-700: #1e1b4b;
+  --color-sky-800: #0f172a;
+  --color-sky-900: #0f172a;
+  --color-sky-950: #0f172a;
+}
+
 :root {
-  color: #dbeafe;
-  background: #050b18;
+  color: #1e293b;
+  background: #f8fafc;
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -22,9 +50,10 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(14, 165, 233, 0.24), transparent 34rem),
-    radial-gradient(circle at 80% 10%, rgba(16, 185, 129, 0.12), transparent 26rem),
-    linear-gradient(135deg, #050b18 0%, #081120 48%, #0d1628 100%);
+    radial-gradient(circle at top left, rgba(99, 102, 241, 0.08), transparent 38rem),
+    radial-gradient(circle at 80% 12%, rgba(168, 85, 247, 0.06), transparent 30rem),
+    linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+  color: #1e293b;
 }
 
 a {
@@ -39,28 +68,33 @@ textarea {
   font: inherit;
 }
 
+/* Glassmorphism card styling: refined for light mode with soft shadows */
 .glass {
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  background: rgba(15, 23, 42, 0.72);
-  box-shadow: 0 24px 80px rgba(2, 6, 23, 0.36);
-  backdrop-filter: blur(18px);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    0 1px 3px 0 rgba(0, 0, 0, 0.02),
+    0 4px 12px 0 rgba(15, 23, 42, 0.03),
+    0 16px 32px -4px rgba(15, 23, 42, 0.04);
+  backdrop-filter: blur(12px);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .soft-grid {
   background-image:
-    linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
-  background-size: 44px 44px;
+    linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 .animate-rise {
-  animation: rise 0.45s ease both;
+  animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -70,12 +104,34 @@ textarea {
 
 .leaflet-container {
   min-height: 560px;
-  border-radius: 8px;
-  background: #0f172a;
+  border-radius: 12px;
+  background: #f1f5f9;
+  border: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-  background: #0f172a;
-  color: #e2e8f0;
+  background: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }

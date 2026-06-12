@@ -1,3 +1,5 @@
-import { useContext } from 'react';
+import { dashboardData } from '../utils/mockData'
 
-export const useDashboard = () => useContext(DashboardContext)
+export function useDashboard() {
+  return dashboardData
+}

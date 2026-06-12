@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="border-t border-slate-800 bg-slate-950/80">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-4 lg:px-8">
         <div className="md:col-span-2">
-          <div className="mb-3 flex items-center gap-2 text-lg font-bold text-white">
+          <div className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-50">
             <ShieldCheck className="h-5 w-5 text-sky-300" />
             City Safety AI
           </div>

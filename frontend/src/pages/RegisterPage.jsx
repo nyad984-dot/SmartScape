@@ -54,10 +54,9 @@ export default function RegisterPage() {
     navigate('/dashboard')
   }
 
-
   return (
     <Card>
-      <h1 className="text-2xl font-semibold text-white">Create account</h1>
+      <h1 className="text-2xl font-semibold text-slate-100">Create account</h1>
       <p className="mt-2 text-sm text-slate-400">Join City Safety AI as a resident or civic operator.</p>
       <form className="mt-6 space-y-4" onSubmit={handleRegister}>
         <Input
@@ -93,16 +92,15 @@ export default function RegisterPage() {
           type="password"
           value={form.confirmPassword}
         />
-        {error && <p className="text-sm font-medium text-rose-300">{error}</p>}
-        {success && <p className="text-sm font-medium text-emerald-300">{success}</p>}
+        {error && <p className="text-sm font-medium text-rose-600">{error}</p>}
+        {success && <p className="text-sm font-medium text-emerald-600">{success}</p>}
         <Button className="w-full" disabled={loading} type="submit">
           {loading ? 'Creating account...' : 'Register'}
         </Button>
       </form>
       <p className="mt-5 text-center text-sm text-slate-400">
-        Already registered? <Link className="text-sky-300" to="/login">Sign in</Link>
+        Already registered? <Link className="text-sky-300 font-semibold" to="/login">Sign in</Link>
       </p>
     </Card>
   )
 }
-

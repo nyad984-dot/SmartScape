@@ -30,14 +30,14 @@ export default function HomePage() {
     <div className="space-y-16">
       <section className="grid min-h-[72vh] items-center gap-10 py-6 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="animate-rise">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-300/25 bg-sky-400/10 px-3 py-1 text-sm font-semibold text-sky-200">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-sm font-semibold text-sky-300">
             <RadioTower className="h-4 w-4" />
             Smart city incident intelligence
           </div>
-          <h1 className="max-w-4xl text-5xl font-bold tracking-tight text-white md:text-7xl">
+          <h1 className="max-w-4xl text-5xl font-bold tracking-tight text-slate-50 md:text-7xl">
             AI-Powered City Safety Platform
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
             Helping cities respond faster to public issues and emergencies.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -51,9 +51,9 @@ export default function HomePage() {
             className="aspect-[4/3] w-full rounded-lg object-cover opacity-90"
             src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1100&q=80"
           />
-          <div className="absolute bottom-8 left-8 right-8 rounded-lg border border-slate-700 bg-slate-950/80 p-4 backdrop-blur">
+          <div className="absolute bottom-8 left-8 right-8 rounded-lg border border-slate-700 bg-slate-950/90 p-4 backdrop-blur shadow-lg">
             <p className="text-sm text-slate-400">Live AI routing</p>
-            <p className="mt-1 text-xl font-semibold text-white">Traffic signal outage prioritized as High</p>
+            <p className="mt-1 text-xl font-semibold text-slate-50">Traffic signal outage prioritized as High</p>
           </div>
         </div>
       </section>
@@ -61,20 +61,20 @@ export default function HomePage() {
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map(([value, label]) => (
           <Card className="animate-rise" key={label}>
-            <p className="text-3xl font-bold text-white">{value}</p>
-            <p className="mt-2 text-sm text-slate-400">{label}</p>
+            <p className="text-3xl font-bold text-slate-50">{value}</p>
+            <p className="mt-2 text-sm text-slate-300">{label}</p>
           </Card>
         ))}
       </section>
 
       <section>
-        <h2 className="text-3xl font-semibold text-white">Built for fast civic response</h2>
+        <h2 className="text-3xl font-semibold text-slate-50">Built for fast civic response</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {features.map(([title, Icon, text]) => (
             <Card className="transition hover:-translate-y-1 hover:border-sky-300/40" key={title}>
-              <Icon className="mb-5 h-8 w-8 text-sky-300" />
-              <h3 className="text-lg font-semibold text-white">{title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-400">{text}</p>
+              <Icon className="mb-5 h-8 w-8 text-sky-400" />
+              <h3 className="text-lg font-semibold text-slate-100">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
             </Card>
           ))}
         </div>
@@ -84,15 +84,15 @@ export default function HomePage() {
         {['Submit report', 'AI analyzes issue', 'Department receives request', 'Issue gets resolved'].map((step, index) => (
           <Card key={step}>
             <p className="text-sm font-semibold text-sky-300">Step {index + 1}</p>
-            <h3 className="mt-3 text-lg font-semibold text-white">{step}</h3>
+            <h3 className="mt-3 text-lg font-semibold text-slate-100">{step}</h3>
           </Card>
         ))}
       </section>
 
       <section className="glass rounded-lg p-8 text-center">
-        <MapPinned className="mx-auto mb-4 h-10 w-10 text-sky-300" />
-        <h2 className="text-3xl font-semibold text-white">Turn resident reports into coordinated action</h2>
-        <p className="mx-auto mt-3 max-w-2xl text-slate-400">
+        <MapPinned className="mx-auto mb-4 h-10 w-10 text-sky-400" />
+        <h2 className="text-3xl font-semibold text-slate-50">Turn resident reports into coordinated action</h2>
+        <p className="mx-auto mt-3 max-w-2xl text-slate-300">
           Give every department a shared operating picture for safer, cleaner, more responsive neighborhoods.
         </p>
         <Button className="mt-6" to="/register">Start now</Button>
