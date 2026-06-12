@@ -21,5 +21,5 @@ export function useAssistant() {
     }, 500)
   }
 
-  return { messages, isTyping, sendMessage }
-}
+  return { messages, isTyping, sendMessage };
+};
