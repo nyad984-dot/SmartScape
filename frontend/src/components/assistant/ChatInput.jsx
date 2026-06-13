@@ -12,9 +12,9 @@ export default function ChatInput({ onSend }) {
   }
 
   return (
-    <form className="flex gap-2 border-t border-slate-800 pt-4" onSubmit={submit}>
+    <form className="flex gap-2 border-t border-slate-300 pt-4" onSubmit={submit}>
       <input
-        className="min-w-0 flex-1 rounded-lg border border-slate-700 bg-slate-950/60 px-3 py-2 text-slate-100 outline-none focus:border-sky-300"
+        className="min-w-0 flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-800 outline-none focus:border-sky-500"
         onChange={(event) => setValue(event.target.value)}
         placeholder="Ask about incident priority, routing, or trends"
         value={value}

@@ -10,6 +10,23 @@ export const authService = {
     return localStorage.getItem(TOKEN_KEY) ? getSavedUser() || userProfile : null
   },
   async login(credentials) {
+    if (credentials.email === 'danya@gmail.com' && credentials.password === 'danya123456789') {
+      const adminUser = {
+        name: 'Danya',
+        email: 'danya@gmail.com',
+        avatar: 'D',
+        district: 'Almaty City Council',
+        stats: [
+          { label: 'Reports filed', value: 42 },
+          { label: 'Resolved', value: 38 },
+          { label: 'Impact score', value: 99 },
+        ],
+      }
+      localStorage.setItem(TOKEN_KEY, 'mock-token')
+      localStorage.setItem(USER_KEY, JSON.stringify(adminUser))
+      return { user: adminUser, token: 'mock-token' }
+    }
+
     const savedUser = getSavedUser()
 
     if (!savedUser) {
@@ -31,10 +48,12 @@ export const authService = {
       password: values.password,
     }
 
-    localStorage.setItem(TOKEN_KEY, 'mock-token')
+    const generatedToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' + btoa(values.email) + '.' + Math.random().toString(36).substring(2, 15);
+
+    localStorage.setItem(TOKEN_KEY, generatedToken)
     localStorage.setItem(USER_KEY, JSON.stringify(user))
 
-    return { user, token: 'mock-token' }
+    return { user, token: generatedToken }
   },
   logout() {
     localStorage.removeItem(TOKEN_KEY)

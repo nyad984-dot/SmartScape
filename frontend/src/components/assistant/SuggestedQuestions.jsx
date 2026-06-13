@@ -9,7 +9,7 @@ export default function SuggestedQuestions({ onSelect }) {
     <div className="flex flex-wrap gap-2">
       {questions.map((question) => (
         <button
-          className="rounded-full border border-slate-700 bg-slate-900/70 px-3 py-1.5 text-sm text-slate-300 transition hover:border-sky-300 hover:text-white"
+          className="rounded-full border border-slate-200 bg-slate-50/70 px-3 py-1.5 text-sm text-slate-600 transition hover:border-sky-300 hover:text-slate-900"
           key={question}
           onClick={() => onSelect(question)}
           type="button"

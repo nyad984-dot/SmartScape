@@ -12,6 +12,7 @@ export default function RegisterPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState('')
+  const [token, setToken] = useState('')
 
   const [form, setForm] = useState({
     name: '',
@@ -48,16 +49,17 @@ export default function RegisterPage() {
     }
 
     setLoading(true)
-    await register(form)
-    setSuccess(`Welcome, ${form.name}!`)
+    const result = await register(form)
+    setToken(result.token)
+    setSuccess(`Welcome, ${form.name}! Your account has been created.`)
     setLoading(false)
-    navigate('/dashboard')
+    // Removed immediate navigation so user can see token
   }
 
   return (
     <Card>
-      <h1 className="text-2xl font-semibold text-slate-100">Create account</h1>
-      <p className="mt-2 text-sm text-slate-400">Join City Safety AI as a resident or civic operator.</p>
+      <h1 className="text-2xl font-semibold text-slate-800">Create account</h1>
+      <p className="mt-2 text-sm text-slate-500">Join City Safety AI as a resident or civic operator.</p>
       <form className="mt-6 space-y-4" onSubmit={handleRegister}>
         <Input
           label="Full Name"
@@ -94,12 +96,24 @@ export default function RegisterPage() {
         />
         {error && <p className="text-sm font-medium text-rose-600">{error}</p>}
         {success && <p className="text-sm font-medium text-emerald-600">{success}</p>}
-        <Button className="w-full" disabled={loading} type="submit">
-          {loading ? 'Creating account...' : 'Register'}
-        </Button>
+        {token && (
+          <div className="mt-4 p-3 bg-white rounded-md border border-slate-200">
+            <p className="text-xs text-slate-500 mb-1">Your Access Token (Save this!)</p>
+            <code className="text-xs text-sky-600 break-all">{token}</code>
+          </div>
+        )}
+        {!token ? (
+          <Button className="w-full" disabled={loading} type="submit">
+            {loading ? 'Creating account...' : 'Register'}
+          </Button>
+        ) : (
+          <Button className="w-full" onClick={() => navigate('/dashboard')} type="button">
+            Go to Dashboard
+          </Button>
+        )}
       </form>
-      <p className="mt-5 text-center text-sm text-slate-400">
-        Already registered? <Link className="text-sky-300 font-semibold" to="/login">Sign in</Link>
+      <p className="mt-5 text-center text-sm text-slate-500">
+        Already registered? <Link className="text-sky-600 font-semibold" to="/login">Sign in</Link>
       </p>
     </Card>
   )

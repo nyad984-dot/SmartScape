@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 
 const variants = {
-  primary: 'bg-sky-400 text-slate-950 hover:bg-sky-300',
-  secondary: 'bg-slate-800/80 text-slate-100 hover:bg-slate-700',
-  ghost: 'text-slate-300 hover:bg-slate-800/80',
-  danger: 'bg-rose-500 text-white hover:bg-rose-400',
+  primary: 'bg-sky-500 text-white hover:bg-sky-600',
+  secondary: 'bg-white border border-slate-200 text-slate-800 hover:bg-slate-50',
+  ghost: 'text-slate-600 hover:bg-slate-100',
+  danger: 'bg-rose-500 text-white hover:bg-rose-600',
 }
 
 export default function Button({

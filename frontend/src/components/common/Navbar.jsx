@@ -16,13 +16,13 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const { isAuthenticated, logout } = useAuth()
   const linkClass = ({ isActive }) =>
-    `rounded-lg px-3 py-2 text-sm font-medium transition ${isActive ? 'bg-sky-400/15 text-sky-200' : 'text-slate-300 hover:bg-slate-800 hover:text-white'}`
+    `rounded-lg px-3 py-2 text-sm font-medium transition ${isActive ? 'bg-sky-100 text-sky-700' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'}`
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <Link className="flex items-center gap-2 text-lg font-bold text-slate-50" to="/">
-          <span className="grid h-9 w-9 place-items-center rounded-lg bg-sky-400 text-slate-950">
+        <Link className="flex items-center gap-2 text-lg font-bold text-slate-900" to="/">
+          <span className="grid h-9 w-9 place-items-center rounded-lg bg-sky-500 text-slate-900">
             <ShieldCheck className="h-5 w-5" />
           </span>
           City Safety AI
@@ -50,7 +50,7 @@ export default function Navbar() {
         <Button aria-label="Open menu" className="lg:hidden" icon={open ? X : Menu} onClick={() => setOpen((value) => !value)} variant="secondary" />
       </div>
       {open && (
-        <div className="border-t border-slate-800 px-4 pb-4 lg:hidden">
+        <div className="border-t border-slate-300 px-4 pb-4 lg:hidden">
           <nav className="flex flex-col gap-2 pt-3">
             {nav.map(([label, to]) => (
               <NavLink className={linkClass} key={to} onClick={() => setOpen(false)} to={to}>

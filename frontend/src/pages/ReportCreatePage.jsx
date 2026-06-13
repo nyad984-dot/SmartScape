@@ -55,17 +55,17 @@ export default function ReportCreatePage() {
             <Textarea label="Description" name="description" placeholder="Describe what happened, who is affected, and the urgency." required />
             <div className="grid gap-4 md:grid-cols-2">
               <Input label="Location" name="location" placeholder="Street, intersection, or landmark" required />
-              <label className="block space-y-2 text-sm font-medium text-slate-300">
+              <label className="block space-y-2 text-sm font-medium text-slate-600">
                 <span>Category</span>
-                <select className="w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 py-2.5 text-slate-100 outline-none focus:border-sky-300" name="category">
+                <select className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-slate-800 outline-none focus:border-sky-500" name="category">
                   {['Traffic', 'Road Damage', 'Garbage', 'Lighting', 'Emergency'].map((category) => (
                     <option key={category}>{category}</option>
                   ))}
                 </select>
               </label>
             </div>
-            <label className="flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-slate-700 bg-slate-950/40 p-8 text-center text-slate-400 transition hover:border-sky-300">
-              <Upload className="mb-2 h-6 w-6 text-sky-300" />
+            <label className="flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-slate-200 bg-white/40 p-8 text-center text-slate-500 transition hover:border-sky-300">
+              <Upload className="mb-2 h-6 w-6 text-sky-600" />
               Image Upload
               <input className="hidden" name="image" type="file" />
             </label>
@@ -79,12 +79,12 @@ export default function ReportCreatePage() {
           {submitted && <Alert type="success">Report submitted and routed to Transport Department.</Alert>}
           {showAnalysis && (
             <Card>
-              <h2 className="mb-4 text-lg font-semibold text-slate-100">AI Analysis</h2>
+              <h2 className="mb-4 text-lg font-semibold text-slate-800">AI Analysis</h2>
               <div className="space-y-3">
                 {Object.entries(analysis).map(([key, value]) => (
-                  <div className="flex justify-between gap-4 border-b border-slate-800 pb-3 last:border-0" key={key}>
-                    <span className="text-sm text-slate-400">{key}</span>
-                    <span className="text-right text-sm font-semibold text-slate-100">{value}</span>
+                  <div className="flex justify-between gap-4 border-b border-slate-300 pb-3 last:border-0" key={key}>
+                    <span className="text-sm text-slate-500">{key}</span>
+                    <span className="text-right text-sm font-semibold text-slate-800">{value}</span>
                   </div>
                 ))}
               </div>
