@@ -27,25 +27,62 @@ export default function ReportCreatePage() {
     return <Navigate to="/dashboard" replace />
   }
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault()
     const form = new FormData(event.currentTarget)
-    addReport({
-      id: `RPT-${Date.now().toString().slice(-4)}`,
-      title: form.get('title'),
-      description: form.get('description'),
-      location: form.get('location'),
-      category: form.get('category'),
-      status: 'Open',
-      priority: 'High',
-      department: 'Transport Department',
-      date: new Date().toISOString(),
-      image: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?auto=format&fit=crop&w=900&q=80',
-      timeline: ['Report submitted', 'AI analysis completed'],
-      comments: ['New report awaiting department acknowledgement.'],
-    })
-    setShowAnalysis(true)
-    setSubmitted(true)
+    
+    const category = form.get('category') || 'Traffic';
+    
+    let boardId = 1;
+    try {
+      // Import api dynamically or rely on global fetch if needed, but we have api from services
+      // Actually we need to import api at the top. Let's do it in the file modification below.
+      const { default: api } = await import('../services/api');
+      const boardsRes = await api.get('/api/board');
+      const boards = boardsRes.data || [];
+      const matched = boards.find(b => b.name.toLowerCase() === category.toLowerCase());
+      if (matched) {
+        boardId = matched.id;
+      } else if (boards.length > 0) {
+        boardId = boards[0].id;
+      }
+    } catch (e) {
+      console.error('Failed to fetch boards', e);
+    }
+
+    const rawUSerText = `Title: ${form.get('title')}\nDescription: ${form.get('description')}\nLocation: ${form.get('location')}`;
+    
+    try {
+      const { default: api } = await import('../services/api');
+      const response = await api.post('/api/ticket', {
+        boardId: boardId,
+        rawUSerText: rawUSerText,
+        photoUrl: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?auto=format&fit=crop&w=900&q=80'
+      });
+      
+      const realTicket = response.data;
+      
+      addReport({
+        id: `RPT-${realTicket.id || Date.now().toString().slice(-4)}`,
+        title: realTicket.title || form.get('title'),
+        description: realTicket.description || form.get('description'),
+        location: form.get('location'),
+        category: category,
+        status: realTicket.status || 'Open',
+        priority: 'High',
+        department: 'City Department',
+        date: new Date().toISOString(),
+        image: realTicket.photoUrl || 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?auto=format&fit=crop&w=900&q=80',
+        timeline: ['Report submitted', 'AI analysis completed'],
+        comments: ['New report awaiting department acknowledgement.'],
+      })
+      
+      setShowAnalysis(true)
+      setSubmitted(true)
+    } catch (e) {
+      console.error("Error creating ticket:", e);
+      alert("Failed to create report: " + (e.response?.data?.message || e.response?.data || e.message));
+    }
   }
 
   return (

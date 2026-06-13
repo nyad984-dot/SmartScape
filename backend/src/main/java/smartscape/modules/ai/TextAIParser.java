@@ -28,4 +28,17 @@ public class TextAIParser {
                 .call()
                 .entity(AiTicketResponse.class);
     }
+
+    public String chatWithAssistant(String userMessage) {
+        String systemPrompt = """
+                Ты умный ИИ-ассистент системы управления жилыми комплексами (SmartScape).
+                Твоя задача — консультировать жильцов и администраторов по вопросам работы ЖК,
+                статусу заявок, безопасности и бытовым проблемам. Отвечай кратко, вежливо и по делу.
+                """;
+        return chatClient.prompt()
+                .system(systemPrompt)
+                .user(userMessage)
+                .call()
+                .content();
+    }
 }

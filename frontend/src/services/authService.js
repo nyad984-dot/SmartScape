@@ -10,42 +10,35 @@ export const authService = {
     return localStorage.getItem(TOKEN_KEY) ? getSavedUser() : null
   },
   async login(credentials) {
-    if (credentials.email === 'danya@gmail.com' && credentials.password === 'danya123456789') {
-      const adminUser = {
-        name: 'Danya',
-        email: 'danya@gmail.com',
-        avatar: 'D',
-        district: 'Almaty City Council',
-        stats: [
-          { label: 'Reports filed', value: 42 },
-          { label: 'Resolved', value: 38 },
-          { label: 'Impact score', value: 99 },
-        ],
+    try {
+      const response = await api.post('/api/auth/login', {
+        phone: credentials.phone,
+        password: credentials.password
+      })
+      
+      const token = response.data
+      localStorage.setItem(TOKEN_KEY, token)
+
+      // Since the backend doesn't return user details yet, we create a mock user object
+      const user = {
+        phone: credentials.phone,
+        name: 'User ' + credentials.phone,
+        role: 'ADMIN' // Defaulting to ADMIN to see the dashboard properly for now
       }
-      localStorage.setItem(TOKEN_KEY, 'mock-token')
-      localStorage.setItem(USER_KEY, JSON.stringify(adminUser))
-      return { user: adminUser, token: 'mock-token' }
+      localStorage.setItem(USER_KEY, JSON.stringify(user))
+
+      return { user, token }
+    } catch (error) {
+      const message = error.response?.data?.message || error.response?.data || error.message || 'Login failed'
+      throw new Error(typeof message === 'string' ? message : 'Login failed')
     }
-
-    const savedUser = getSavedUser()
-
-    if (!savedUser) {
-      throw new Error('User not found')
-    }
-
-    if (savedUser.email !== credentials.email || savedUser.password !== credentials.password) {
-      throw new Error('Invalid email or password')
-    }
-
-    localStorage.setItem(TOKEN_KEY, 'mock-token')
-    return { user: savedUser, token: 'mock-token' }
   },
   async register(values) {
     try {
       await api.post('/api/auth/register', {
         phone: values.phone,
         password: values.password,
-        role: 'CITIZEN'
+        role: 'CITIZEN' // or 'ADMIN' depending on needs
       })
 
       // After successful registration, automatically login
@@ -54,8 +47,8 @@ export const authService = {
         password: values.password
       })
     } catch (error) {
-      const message = error.response?.data?.message || error.message || 'Registration failed'
-      throw new Error(message)
+      const message = error.response?.data?.message || error.response?.data || error.message || 'Registration failed'
+      throw new Error(typeof message === 'string' ? message : 'Registration failed')
     }
   },
   logout() {
