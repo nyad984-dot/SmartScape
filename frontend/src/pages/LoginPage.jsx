@@ -13,7 +13,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState({
-    email: '',
+    phone: '',
     password: '',
   });
 
@@ -30,10 +30,15 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
 
-    if (!form.email || !form.password) {
+    if (!form.phone || !form.password) {
       setError('Please fill all fields');
       return;
     };
+
+    if (form.phone.length !== 11) {
+      setError('Phone number must be exactly 11 digits');
+      return;
+    }
 
     if (form.password.length < 8) {
       setError("Password must be at least 8 characters");
@@ -45,7 +50,7 @@ export default function LoginPage() {
     try {
       await login(form);
       setForm({
-        email: "",
+        phone: "",
         password: ""
       });
       navigate("/dashboard");
@@ -62,13 +67,13 @@ export default function LoginPage() {
       <p className="mt-2 text-sm text-slate-500">Sign in to manage reports and city analytics.</p>
       <form className="mt-6 space-y-4" onSubmit={handleLogin}>
         <Input
-          label="Email"
-          name="email"
+          label="Phone Number"
+          name="phone"
           onChange={handleChange}
-          placeholder="you@city.ai"
+          placeholder="87771234567"
           required
-          type="email"
-          value={form.email}
+          type="tel"
+          value={form.phone}
         />
         <Input
           label="Password"

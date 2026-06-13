@@ -21,6 +21,7 @@ export const reports = [
     priority: 'High',
     date: '2026-06-10',
     location: 'Abay Ave and Dostyk Ave',
+    position: { lat: 43.2435, lng: 76.9531 },
     category: 'Traffic',
     department: 'Transport Department',
     image:
@@ -41,6 +42,7 @@ export const reports = [
     priority: 'Critical',
     date: '2026-06-09',
     location: 'Satpaev Street 42',
+    position: { lat: 43.2384, lng: 76.9242 },
     category: 'Road Damage',
     department: 'Road Maintenance',
     image:
@@ -57,6 +59,7 @@ export const reports = [
     priority: 'Medium',
     date: '2026-06-08',
     location: 'Green Bazaar service lane',
+    position: { lat: 43.2625, lng: 76.9554 },
     category: 'Garbage',
     department: 'Sanitation Department',
     image:
@@ -73,6 +76,7 @@ export const reports = [
     priority: 'High',
     date: '2026-06-07',
     location: 'Central Park north path',
+    position: { lat: 43.2548, lng: 76.9632 },
     category: 'Lighting',
     department: 'Energy Services',
     image:
