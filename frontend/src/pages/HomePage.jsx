@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
+import { useAuth } from '../hooks/useAuth'
 
 const stats = [
   ['1200', 'Reports Processed'],
@@ -26,6 +27,8 @@ const features = [
 ]
 
 export default function HomePage() {
+  const { user } = useAuth()
+
   return (
     <div className="space-y-16">
       <section className="grid min-h-[72vh] items-center gap-10 py-6 lg:grid-cols-[1.05fr_0.95fr]">
@@ -41,7 +44,7 @@ export default function HomePage() {
             Helping cities respond faster to public issues and emergencies.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button icon={ShieldCheck} to="/report/create">Report Issue</Button>
+            {user?.role === 'CITIZEN' && <Button icon={ShieldCheck} to="/report/create">Report Issue</Button>}
             <Button icon={Activity} to="/dashboard" variant="secondary">View Dashboard</Button>
           </div>
         </div>

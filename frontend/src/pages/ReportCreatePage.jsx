@@ -1,11 +1,13 @@
 import { BrainCircuit, Upload } from 'lucide-react'
 import { useState } from 'react'
+import { Navigate } from 'react-router-dom'
 import Alert from '../components/ui/Alert'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
 import Input from '../components/ui/Input'
 import Textarea from '../components/ui/Textarea'
 import PageHeader from '../components/common/PageHeader'
+import { useAuth } from '../hooks/useAuth'
 import { useReports } from '../hooks/useReports'
 
 const analysis = {
@@ -16,9 +18,14 @@ const analysis = {
 }
 
 export default function ReportCreatePage() {
+  const { user } = useAuth()
   const [showAnalysis, setShowAnalysis] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const { addReport } = useReports()
+
+  if (user?.role !== 'CITIZEN') {
+    return <Navigate to="/dashboard" replace />
+  }
 
   const onSubmit = (event) => {
     event.preventDefault()

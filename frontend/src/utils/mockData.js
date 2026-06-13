@@ -1,6 +1,7 @@
 export const userProfile = {
   name: 'Aida Karimova',
   email: 'aida.karimova@city.ai',
+  role: 'CITIZEN',
   avatar: 'AK',
   district: 'Medeu District',
   stats: [

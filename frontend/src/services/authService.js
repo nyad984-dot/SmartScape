@@ -14,6 +14,7 @@ export const authService = {
       const adminUser = {
         name: 'Danya',
         email: 'danya@gmail.com',
+        role: 'ADMIN',
         avatar: 'D',
         district: 'Almaty City Council',
         stats: [

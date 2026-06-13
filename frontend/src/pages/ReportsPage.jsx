@@ -5,11 +5,13 @@ import PageHeader from '../components/common/PageHeader'
 import Badge from '../components/ui/Badge'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
+import { useAuth } from '../hooks/useAuth'
 import { useReports } from '../hooks/useReports'
 import { REPORT_STATUSES } from '../utils/constants'
 import { formatDate, getPriorityColor, getStatusColor } from '../utils/formatters'
 
 export default function ReportsPage() {
+  const { user } = useAuth()
   const { reports } = useReports()
   const [status, setStatus] = useState('All')
   const [query, setQuery] = useState('')
@@ -27,7 +29,7 @@ export default function ReportsPage() {
   return (
     <>
       <PageHeader
-        action={<Button to="/report/create">Create report</Button>}
+        action={user?.role === 'CITIZEN' && <Button to="/report/create">Create report</Button>}
         description="Search active incidents, filter by workflow state, and inspect department ownership."
         eyebrow="Operations"
         title="Reports"
