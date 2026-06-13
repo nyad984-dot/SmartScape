@@ -11,4 +11,9 @@ api.interceptors.request.use((config) => {
   return config
 })
 
+export const postAssistantMessage = async (content) => {
+  const response = await api.post('/assistant/chat', { message: content })
+  return response.data
+}
+
 export default api
