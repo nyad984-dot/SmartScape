@@ -12,13 +12,13 @@ export default function ChatMessage({ message }) {
       )}
       <div
         className={`max-w-[82%] rounded-lg px-4 py-3 text-sm leading-6 ${
-          isUser ? 'bg-sky-400 text-slate-950' : 'bg-slate-800 text-slate-100'
+          isUser ? 'bg-sky-400 text-slate-950' : 'bg-white text-slate-800'
         }`}
       >
         {message.content}
       </div>
       {isUser && (
-        <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-slate-800 text-slate-200">
+        <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-white text-slate-700">
           <User className="h-4 w-4" />
         </div>
       )}

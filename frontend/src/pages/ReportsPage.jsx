@@ -37,7 +37,7 @@ export default function ReportsPage() {
           <label className="relative flex-1">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
             <input
-              className="w-full rounded-lg border border-slate-700 bg-slate-950/60 py-2.5 pl-10 pr-3 text-slate-100 outline-none focus:border-sky-300"
+              className="w-full rounded-lg border border-slate-200 bg-white py-2.5 pl-10 pr-3 text-slate-800 outline-none focus:border-sky-500"
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search reports"
               value={query}
@@ -46,7 +46,7 @@ export default function ReportsPage() {
           <div className="flex flex-wrap gap-2">
             {REPORT_STATUSES.map((item) => (
               <button
-                className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${status === item ? 'bg-sky-400 text-slate-950' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}
+                className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${status === item ? 'bg-sky-500 text-white' : 'bg-white text-slate-600 hover:bg-slate-100'}`}
                 key={item}
                 onClick={() => setStatus(item)}
                 type="button"
@@ -64,8 +64,8 @@ export default function ReportsPage() {
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{report.id}</p>
-                  <h2 className="mt-1 text-xl font-semibold text-slate-100">{report.title}</h2>
-                  <p className="mt-2 text-sm text-slate-400">{report.location} • {formatDate(report.date)}</p>
+                  <h2 className="mt-1 text-xl font-semibold text-slate-800">{report.title}</h2>
+                  <p className="mt-2 text-sm text-slate-500">{report.location} • {formatDate(report.date)}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <Badge className={getStatusColor(report.status)}>{report.status}</Badge>
