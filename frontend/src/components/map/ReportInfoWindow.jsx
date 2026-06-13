@@ -16,7 +16,7 @@ export default function ReportInfoWindow({ report, onMouseEnter, onMouseLeave, o
       pixelOffset={[0, -45]}
     >
       <div 
-        className="max-w-xs overflow-hidden rounded-lg bg-slate-900 p-0 text-slate-200 shadow-xl ring-1 ring-slate-800 pointer-events-auto"
+        className="max-w-xs overflow-hidden rounded-lg bg-white p-0 text-slate-800 shadow-xl pointer-events-auto"
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >
@@ -44,7 +44,7 @@ export default function ReportInfoWindow({ report, onMouseEnter, onMouseLeave, o
             </Badge>
           </div>
           
-          <div className="mt-3 flex items-center gap-2 text-xs text-slate-400">
+          <div className="mt-3 flex items-center gap-2 text-xs text-slate-800">
             <MapPin className="h-3.5 w-3.5" />
             <span>{report.location}</span>
           </div>

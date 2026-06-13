@@ -1,4 +1,4 @@
-import { userProfile } from '../utils/mockData'
+import api from './api'
 
 const TOKEN_KEY = 'citySafetyToken'
 const USER_KEY = 'citySafetyUser'
@@ -7,55 +7,54 @@ const getSavedUser = () => JSON.parse(localStorage.getItem(USER_KEY) || 'null')
 
 export const authService = {
   getCurrentUser() {
-    return localStorage.getItem(TOKEN_KEY) ? getSavedUser() || userProfile : null
+    return localStorage.getItem(TOKEN_KEY) ? getSavedUser() : null
   },
   async login(credentials) {
-    if (credentials.email === 'danya@gmail.com' && credentials.password === 'danya123456789') {
-      const adminUser = {
-        name: 'Danya',
-        email: 'danya@gmail.com',
-        avatar: 'D',
-        district: 'Almaty City Council',
-        stats: [
-          { label: 'Reports filed', value: 42 },
-          { label: 'Resolved', value: 38 },
-          { label: 'Impact score', value: 99 },
-        ],
-      }
-      localStorage.setItem(TOKEN_KEY, 'mock-token')
-      localStorage.setItem(USER_KEY, JSON.stringify(adminUser))
-      return { user: adminUser, token: 'mock-token' }
+    try {
+      const response = await api.post('/api/auth/login', {
+        phone: credentials.phone,
+        password: credentials.password
+      })
+      
+      // The backend returns the token directly as a string or in an object.
+      // Based on common patterns and the user's prompt about "returning the key", 
+      // let's assume it's response.data or response.data.token.
+      const token = typeof response.data === 'string' ? response.data : response.data.token;
+      
+      if (!token) throw new Error('No token received');
+
+      localStorage.setItem(TOKEN_KEY, token)
+      
+      // Since there's no profile endpoint, we store what we know
+      const userData = { phone: credentials.phone, role: 'CITIZEN' }
+      localStorage.setItem(USER_KEY, JSON.stringify(userData))
+      
+      return { user: userData, token }
+    } catch (error) {
+      const message = error.response?.data?.message || error.message || 'Login failed'
+      throw new Error(message)
     }
-
-    const savedUser = getSavedUser()
-
-    if (!savedUser) {
-      throw new Error('User not found')
-    }
-
-    if (savedUser.email !== credentials.email || savedUser.password !== credentials.password) {
-      throw new Error('Invalid email or password')
-    }
-
-    localStorage.setItem(TOKEN_KEY, 'mock-token')
-    return { user: savedUser, token: 'mock-token' }
   },
   async register(values) {
-    const user = {
-      ...userProfile,
-      name: values.name,
-      email: values.email,
-      password: values.password,
+    try {
+      await api.post('/api/auth/register', {
+        phone: values.phone,
+        password: values.password,
+        role: 'CITIZEN'
+      })
+
+      // After successful registration, automatically login
+      return await this.login({
+        phone: values.phone,
+        password: values.password
+      })
+    } catch (error) {
+      const message = error.response?.data?.message || error.message || 'Registration failed'
+      throw new Error(message)
     }
-
-    const generatedToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' + btoa(values.email) + '.' + Math.random().toString(36).substring(2, 15);
-
-    localStorage.setItem(TOKEN_KEY, generatedToken)
-    localStorage.setItem(USER_KEY, JSON.stringify(user))
-
-    return { user, token: generatedToken }
   },
   logout() {
     localStorage.removeItem(TOKEN_KEY)
+    localStorage.removeItem(USER_KEY)
   },
 }
